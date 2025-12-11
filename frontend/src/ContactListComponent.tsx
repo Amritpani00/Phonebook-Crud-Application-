@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from './axios';
+import { Contact } from './types';
 
 const ContactListComponent = ({ refresh }: { refresh: boolean }) => {
-    const [contacts, setContacts] = useState([]);
+    const [contacts, setContacts] = useState<Contact[]>([]);
 
     useEffect(() => {
         axios.get('/contact-service/contacts')
@@ -14,9 +15,9 @@ const ContactListComponent = ({ refresh }: { refresh: boolean }) => {
     return (
         <div>
             <h1>Contacts</h1>
-            <ul>
-                {contacts.map((contact: any) => (
-                    <li key={contact.id}>{contact.name} - {contact.phone}</li>
+            <ul className="list-group">
+                {contacts.map(contact => (
+                    <li key={contact.id} className="list-group-item">{contact.name} - {contact.phone}</li>
                 ))}
             </ul>
         </div>
